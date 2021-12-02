@@ -57,12 +57,21 @@ exports.getCart = (req, res, next) => {
 	})
 }
 
-exports.postCard = (req, res, next) => {
+exports.postCart = (req, res, next) => {
 	const { id } = req.body
 	Product.findById(id, (product) => {
 		Cart.addProduct(id, product.price)
 	})
 	res.redirect('/cart')
+}
+
+exports.postCartDeleteProduct = (req, res, next) => {
+	const { id } = req.body
+
+	Product.findById(id, (product) => {
+		Cart.deleteProduct(id, product.price)
+		res.redirect('/cart')
+	})
 }
 
 exports.getOrders = (req, res, next) => {
