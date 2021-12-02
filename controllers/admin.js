@@ -17,6 +17,14 @@ exports.postAddProduct = (req, res, next) => {
 	res.redirect('/')
 }
 
+exports.postDeleteProduct = (req, res, next) => {
+	const { id } = req.params
+
+	Product.deleteById(id)
+
+	res.redirect('/admin/products')
+}
+
 exports.getEditProduct = (req, res, next) => {
 	const { edit: editMode } = req.query
 	const { id } = req.params
